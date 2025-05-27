@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر التكنولوجيا - E-Commerce Platform</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-shopping-cart me-2"></i>
+                متجر التكنولوجيا
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products/products.html">المنتجات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart/cart.html">
+                            السلة 
+                            <span class="badge bg-danger" id="cartCount">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="adminNavItem" style="display: none;">
+                        <a class="nav-link" href="admin/admin.html">لوحة التحكم</a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav" id="authNav">
+                    <li class="nav-item" id="loginNavItem">
+                        <a class="nav-link" href="auth/auth.html">
+                            <i class="fas fa-sign-in-alt me-1"></i>
+                            دخول / تسجيل
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown" id="userNavItem" style="display: none;">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i>
+                            <span id="userName"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="orders/orders.html">طلباتي</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn">خروج</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-50">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="display-4 fw-bold text-white mb-4">
+                            مرحباً في متجر التكنولوجيا
+                        </h1>
+                        <p class="lead text-white-50 mb-4">
+                            اكتشف أحدث المنتجات التقنية بأفضل الأسعار. نوفر لك تجربة تسوق مميزة وآمنة.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="products/products.html" class="btn btn-light btn-lg me-3">
+                                <i class="fas fa-shopping-bag me-2"></i>
+                                تسوق الآن
+                            </a>
+                            <a href="auth/auth.html" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>
+                                انضم إلينا
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="section-title">لماذا تختارنا؟</h2>
+                    <p class="section-subtitle">نقدم لك أفضل الخدمات والضمانات</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h4>شحن سريع</h4>
+                        <p class="text-muted">توصيل خلال 24 ساعة داخل القاهرة و 48 ساعة لباقي المحافظات</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>ضمان شامل</h4>
+                        <p class="text-muted">ضمان سنتين على جميع المنتجات مع خدمة ما بعد البيع</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h4>دفع آمن</h4>
+                        <p class="text-muted">طرق دفع متعددة وآمنة مع حماية بياناتك الشخصية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Products Section -->
+    <section class="popular-products py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="section-title">المنتجات الأكثر مبيعاً</h2>
+                    <p class="section-subtitle">اكتشف أحدث وأفضل منتجاتنا</p>
+                </div>
+            </div>
+            
+            <div class="row" id="popularProducts">
+                <!-- سيتم إضافة المنتجات هنا عبر JavaScript -->
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="products/products.html" class="btn btn-primary btn-lg">
+                    عرض جميع المنتجات
+                    <i class="fas fa-arrow-left ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h3 class="text-white mb-3">ابق على اطلاع بأحدث العروض</h3>
+                    <p class="text-white-50 mb-4">اشترك في النشرة الإخبارية لتصلك أحدث المنتجات والعروض الخاصة</p>
+                    
+                    <form class="newsletter-form" id="newsletterForm">
+                        <div class="input-group input-group-lg">
+                            <input type="email" class="form-control" placeholder="أدخل بريدك الإلكتروني" required>
+                            <button class="btn btn-light" type="submit">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                اشتراك
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="fw-bold mb-3">متجر التكنولوجيا</h5>
+                    <p class="text-muted">متجرك الموثوق للحصول على أحدث المنتجات التقنية بأفضل الأسعار وأعلى جودة.</p>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="fw-bold">روابط سريعة</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-muted">الرئيسية</a></li>
+                        <li><a href="products/products.html" class="text-muted">المنتجات</a></li>
+                        <li><a href="cart/cart.html" class="text-muted">السلة</a></li>
+                        <li><a href="auth/auth.html" class="text-muted">تسجيل الدخول</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h6 class="fw-bold">خدمة العملاء</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">اتصل بنا</a></li>
+                        <li><a href="#" class="text-muted">الأسئلة الشائعة</a></li>
+                        <li><a href="#" class="text-muted">سياسة الإرجاع</a></li>
+                        <li><a href="#" class="text-muted">شروط الاستخدام</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 mb-4">
+                    <h6 class="fw-bold">معلومات التواصل</h6>
+                    <ul class="list-unstyled">
+                        <li class="text-muted mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            القاهرة، مصر
+                        </li>
+                        <li class="text-muted mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            +20 123 456 789
+                        </li>
+                        <li class="text-muted">
+                            <i class="fas fa-envelope me-2"></i>
+                            info@techstore.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 text-muted">&copy; 2024 متجر التكنولوجيا. جميع الحقوق محفوظة.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0 text-muted">تم التطوير بواسطة Front-end Bootcamp</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="storage.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+       

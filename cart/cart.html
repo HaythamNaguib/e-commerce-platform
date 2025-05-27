@@ -1,0 +1,40 @@
+<!-- cart/cart.html -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>سلة المشتريات</title>
+  <link rel="stylesheet" href="cart.css"/>
+</head>
+<body>
+  <header>
+    <h2>🛒 سلة المشتريات</h2>
+  </header>
+
+  <main>
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>المنتج</th>
+          <th>الكمية</th>
+          <th>السعر</th>
+          <th>الإجمالي</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <section id="checkout">
+      <p>الإجمالي النهائي: <span id="total-price">0</span> جنيه</p>
+      <input type="text" id="promo-code" placeholder="أدخل كود الخصم">
+      <button onclick="applyPromo()">تطبيق الكود</button>
+      <button onclick="checkout()">اتمام الشراء</button>
+    </section>
+  </main>
+
+  <script src="cart.js"></script>
+  <script src="../promo.js"></script>
+  <script src="../payment.js"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول والتسجيل - المتجر الإلكتروني</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- خلفية متحركة -->
+    <div class="animated-bg">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+        <div class="shape shape4"></div>
+    </div>
+
+    <!-- الحاوي الرئيسي -->
+    <div class="auth-container">
+        <!-- رأس الصفحة -->
+        <div class="auth-header">
+            <div class="logo">
+                <h1>🛍️ المتجر الإلكتروني</h1>
+                <p>مرحباً بك في أفضل متجر إلكتروني</p>
+            </div>
+        </div>
+
+        <!-- حاوي النماذج -->
+        <div class="forms-container">
+            <!-- نموذج تسجيل الدخول -->
+            <div class="form-wrapper" id="loginForm">
+                <div class="form-header">
+                    <h2>تسجيل الدخول</h2>
+                    <p>أدخل بياناتك للوصول إلى حسابك</p>
+                </div>
+
+                <form id="loginFormElement" class="auth-form">
+                    <div class="input-group">
+                        <label for="loginEmail">البريد الإلكتروني</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="loginEmail" name="email" required>
+                            <span class="input-icon">📧</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="loginPassword">كلمة المرور</label>
+                        <div class="input-wrapper">
+                            <input type="password" id="loginPassword" name="password" required>
+                            <span class="input-icon">🔒</span>
+                            <button type="button" class="toggle-password" data-target="loginPassword">
+                                <span class="eye-icon">👁️</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkmark"></span>
+                            تذكرني
+                        </label>
+                        <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">تسجيل الدخول</span>
+                        <span class="btn-loader" style="display: none;">⏳</span>
+                    </button>
+
+                    <div class="form-divider">
+                        <span>أو</span>
+                    </div>
+
+                    <div class="demo-accounts">
+                        <h4>حسابات تجريبية:</h4>
+                        <div class="demo-buttons">
+                            <button type="button" class="demo-btn admin-demo">
+                                <span>👨‍💼</span>
+                                حساب المدير
+                                <small>admin@store.com</small>
+                            </button>
+                            <button type="button" class="demo-btn user-demo">
+                                <span>👤</span>
+                                حساب العميل
+                                <small>user@example.com</small>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="form-footer">
+                    <p>ليس لديك حساب؟ <a href="#" class="switch-form" data-target="register">إنشاء حساب جديد</a></p>
+                </div>
+            </div>
+
+            <!-- نموذج التسجيل -->
+            <div class="form-wrapper" id="registerForm" style="display: none;">
+                <div class="form-header">
+                    <h2>إنشاء حساب جديد</h2>
+                    <p>انضم إلينا واستمتع بتجربة تسوق رائعة</p>
+                </div>
+
+                <form id="registerFormElement" class="auth-form">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="registerFullName">الاسم الكامل</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="registerFullName" name="fullName" required>
+                                <span class="input-icon">👤</span>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="registerUsername">اسم المستخدم</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="registerUsername" name="username" required>
+                                <span class="input-icon">🏷️</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="registerEmail">البريد الإلكتروني</label>
+                        <div class="input-wrapper">
+                            <input type="email" id="registerEmail" name="email" required>
+                            <span class="input-icon">📧</span>
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="registerPassword">كلمة المرور</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="registerPassword" name="password" required minlength="6">
+                                <span class="input-icon">🔒</span>
+                                <button type="button" class="toggle-password" data-target="registerPassword">
+                                    <span class="eye-icon">👁️</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="confirmPassword">تأكيد كلمة المرور</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+                                <span class="input-icon">🔐</span>
+                                <button type="button" class="toggle-password" data-target="confirmPassword">
+                                    <span class="eye-icon">👁️</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="registerPhone">رقم الهاتف</label>
+                        <div class="input-wrapper">
+                            <input type="tel" id="registerPhone" name="phone" required>
+                            <span class="input-icon">📱</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="registerAddress">العنوان</label>
+                        <div class="input-wrapper">
+                            <textarea id="registerAddress" name="address" rows="3" required></textarea>
+                            <span class="input-icon">📍</span>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <span class="checkmark"></span>
+                            أوافق على <a href="#" class="terms-link">الشروط والأحكام</a>
+                        </label>
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="subscribeNews">
+                            <span class="checkmark"></span>
+                            أريد تلقي العروض والأخبار
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">إنشاء الحساب</span>
+                        <span class="btn-loader" style="display: none;">⏳</span>
+                    </button>
+                </form>
+
+                <div class="form-footer">
+                    <p>لديك حساب بالفعل؟ <a href="#" class="switch-form" data-target="login">تسجيل الدخول</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- رسائل التنبيه -->
+        <div id="alertContainer" class="alert-container"></div>
+    </div>
+
+    <!-- تحميل المكتبات -->
+    <script src="/storage.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>

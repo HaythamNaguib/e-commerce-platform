@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - المتجر</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>لوحة تحكم المدير</h1>
+        <nav>
+            <a href="../index.html">الرئيسية</a>
+            <a href="../products/products.html">المنتجات</a>
+            <a href="../orders/orders.html">الطلبات</a>
+            <a href="../cart/cart.html">السلة</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="metrics">
+            <h2>الإحصائيات</h2>
+            <div class="cards">
+                <div class="card"><h3 id="productCount">0</h3><p>عدد المنتجات</p></div>
+                <div class="card"><h3 id="orderCount">0</h3><p>عدد الطلبات</p></div>
+                <div class="card"><h3 id="totalSales">0</h3><p>إجمالي المبيعات</p></div>
+            </div>
+        </section>
+
+        <section class="manage-products">
+            <h2>إدارة المنتجات</h2>
+            <div id="productList"></div>
+        </section>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>

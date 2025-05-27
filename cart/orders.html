@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>طلباتي - متجر إلكتروني</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .orders-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+        }
+
+        .page-header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        .page-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+        }
+
+        .orders-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-right: 4px solid #667eea;
+        }
+
+        .order-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .order-info h3 {
+            margin: 0 0 0.5rem 0;
+            color: #333;
+            font-size: 1.2rem;
+        }
+
+        .order-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .order-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-align: center;
+            min-width: 100px;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        .status-confirmed {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .status-shipped {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-delivered {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f1b0b7;
+        }
+
+        .order-items {
+            margin-bottom: 1.5rem;
+        }
+
+        .order-items h4 {
+            margin: 0 0 1rem 0;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            flex: 1;
+            font-weight: 500;
+            min-width: 150px;
+        }
+
+        .item-quantity {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .item-price {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .order-details {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .order-total {
+            font-size: 1.2rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .shipping-address, .payment-method {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .no-orders {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .no-orders h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .no-orders p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .close {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .order-full-details p {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-items-detailed {
+            margin: 1rem 0;
+        }
+
+        .item-detailed {
+            background: #f8f9fa;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-right: 3px solid #667eea;
+        }
+
+        .item-detailed p {
+            margin: 0.25rem 0;
+            border: none;
+        }
+
+        .order-total-detailed {
+            background: #667eea;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .order-total-detailed h3 {
+            margin: 0;
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 2000;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            background: #28a745;
+        }
+
+        .notification.error {
+            background: #dc3545;
+        }
+
+        .notification.info {
+            background: #17a2b8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .orders-container {
+                padding: 0 0.5rem;
+            }
+
+            .page-header {
+                padding: 2rem 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .order-card {
+                padding: 1.5rem;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .order-status {
+                align-self: flex-start;
+                margin-top: 0.5rem;
+            }
+
+            .order-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+
+            .order-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="../index.html">🛒 المتجر الإلكتروني</a>
+            </div>
+            <div class="nav-menu">
+                <a href="../index.html">الرئيسية</a>
+                <a href="../products/products.html">المنتجات</a>
+                <a href="../cart/cart.html">السلة</a>
+                <a href="orders.html" class="active">طلباتي</a>
+                <div class="user-menu">
+                    <span id="user-name">مرحباً</span>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">الحساب</button>
+                        <div class="dropdown-content">
+                            <a href="orders.html">طلباتي</a>
+                            <a href="#" id="logout-btn">تسجيل الخروج</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="orders-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>طلباتي</h1>
+            <p>تابع حالة طلباتك وتاريخ الشراء</p>
+        </div>
+
+        <!-- Orders Statistics -->
+        <div class="orders-stats" id="orders-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-orders">0</div>
+                <div class="stat-label">إجمالي الطلبات</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pending-orders">0</div>
+                <div class="stat-label">طلبات قيد المراجعة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="delivered-orders">0</div>
+                <div class="stat-label">طلبات مكتملة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-spent">0 ج.م</div>
+                <div class="stat-label">إجمالي المشتريات</div>
+            </div>
+        </div>
+
+        <!-- Filter Options -->
+        <div class="filter-section">
+            <div class="filter-controls">
+                <select id="status-filter" class="filter-select">
+                    <option value="">جميع الحالات</option>
+                    <option value="pending">قيد المراجعة</option>
+                    <option value="confirmed">تم التأكيد</option>
+                    <option value="shipped">قيد التوصيل</option>
+                    <option value="delivered">تم التوصيل</option>
+                    <option value="cancelled">ملغي</option>
+                </select>
+                <select id="date-filter" class="filter-select">
+                    <option value="">كل الفترات</option>
+                    <option value="week">الأسبوع الماضي</option>
+                    <option value="month">الشهر الماضي</option>
+                    <option value="3months">آخر 3 شهور</option>
+                    <option value="year">السنة الماضية</option>
+                </select>
+                <button id="export-orders" class="btn btn-secondary">تصدير الطلبات</button>
+            </div>
+        </div>
+
+        <!-- Orders Container -->
+        <div id="orders-container">
+            <div class="loading">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../storage.js"></script>
+    <script src="../app.js"></script>
+    <script src="orders.js"></script>
+
+    <script>
+        // التحقق من تسجيل الدخول
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = getCurrentUser();
+            if (!currentUser) {
+                window.location.href = '../auth/auth.html';
+                return;
+            }
+
+            // عرض اسم المستخدم
+            document.getElementById('user-name').textContent = `مرحباً، ${currentUser.username}`;
+
+            // تحديث الإحصائيات
+            updateOrderStats();
+
+            // إعداد الفلاتر
+            setupFilters();
+
+            // معالجة تسجيل الخروج
+            document.getElementById('logout-btn').addEventListener('click', (e) => {
+                e.preventDefault();
+                logout();
+            });
+
+            // معالجة تصدير الطلبات
+            document.getElementById('export-orders').addEventListener('click', () => {
+                if (orderManager) {
+                    orderManager.exportOrders();
+                }
+            });
+
+            // Mobile menu toggle
+            const navToggle = document.querySelector('.nav-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            navToggle.addEventListener('click', () => {
+                navToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        });
+
+        // تحديث إحصائيات الطلبات
+        function updateOrderStats() {
+            if (!orderManager) return;
+
+            const stats = orderManager.getOrderStats();
+            const userOrders = orderManager.getUserOrders();
+            
+            // حساب إجمالي مبلغ طلبات المستخدم
+            const userTotalSpent = userOrders
+                .filter(order => order.status === 'delivered')
+                .reduce((sum, order) => sum + order.total, 0);
+
+            const userPendingOrders = userOrders.filter(order => order.status === 'pending').length;
+            const userDeliveredOrders = userOrders.filter(order => order.status === 'delivered').length;
+
+            document.getElementById('total-orders').textContent = userOrders.length;
+            document.getElementById('pending-orders').textContent = userPendingOrders;
+            document.getElementById('delivered-orders').textContent = userDeliveredOrders;
+            document.getElementById('total-spent').textContent = `${userTotalSpent} ج.م`;
+        }
+
+        // إعداد الفلاتر
+        function setupFilters() {
+            const statusFilter = document.getElementById('status-filter');
+            const dateFilter = document.getElementById('date-filter');
+
+            statusFilter.addEventListener('change', applyFilters);
+            dateFilter.addEventListener('change', applyFilters);
+        }
+
+        // تطبيق الفلاتر
+        function applyFilters() {
+            if (!orderManager) return;
+
+            const statusFilter = document.getElementById('status-filter').value;
+            const dateFilter = document.getElementById('date-filter').value;
+
+            let orders = orderManager.getUserOrders();
+
+            // فلتر الحالة
+            if (statusFilter) {
+                orders = orders.filter(order => order.status === statusFilter);
+            }
+
+            // فلتر التاريخ
+            if (dateFilter) {
+                const now = new Date();
+                const filterDate = new Date();
+
+                switch (dateFilter) {
+                    case 'week':
+                        filterDate.setDate(now.getDate() - 7);
+                        break;
+                    case 'month':
+                        filterDate.setMonth(now.getMonth() - 1);
+                        break;
+                    case '3months':
+                        filterDate.setMonth(now.getMonth() - 3);
+                        break;
+                    case 'year':
+                        filterDate.setFullYear(now.getFullYear() - 1);
+                        break;
+                }
+
+                orders = orders.filter(order => new Date(order.date) >= filterDate);
+            }
+
+            // عرض النتائج المفلترة
+            displayFilteredOrders(orders);
+        }
+
+        // عرض الطلبات المفلترة
+        function displayFilteredOrders(orders) {
+            const ordersContainer = document.getElementById('orders-container');
+            
+            if (orders.length === 0) {
+                ordersContainer.innerHTML = `
+                    <div class="no-orders">
+                        <h3>لا توجد طلبات</h3>
+                        <p>لا توجد طلبات تطابق المعايير المحددة</p>
+                        <button onclick="clearFilters()" class="btn btn-primary">مسح الفلاتر</button>
+                    </div>
+                `;
+                return;
+            }
+
+            // ترتيب الطلبات حسب التاريخ (الأحدث أولاً)
+            orders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            ordersContainer.innerHTML = orders.map(order => 
+                orderManager.createOrderCard(order)
+            ).join('');
+            
+            // إضافة مستمعي الأحداث
+            orderManager.attachOrderEvents();
+        }
+
+        // مسح الفلاتر
+        function clearFilters() {
+            document.getElementById('status-filter').value = '';
+            document.getElementById('date-filter').value = '';
+            if (orderManager) {
+                orderManager.loadOrders();
+            }
+        }
+
+        // تسجيل الخروج
+        function logout() {
+            if (confirm('هل أنت متأكد من تسجيل الخروج؟')) {
+                removeFromStorage('currentUser');
+                window.location.href = '../auth/auth.html';
+            }
+        }
+
+        // الاستماع لأحداث الطلبات
+        document.addEventListener('order-created', (e) => {
+            updateOrderStats();
+            if (orderManager) {
+                orderManager.loadOrders();
+            }
+        });
+
+        document.addEventListener('order-updated', (e) => {
+            updateOrderStats();
+            if (orderManager) {
+                orderManager.loadOrders();
+            }
+        });
+    </script>
+
+    <style>
+        /* Filter Section Styles */
+        .filter-section {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            background: white;
+            font-size: 0.9rem;
+            min-width: 150px;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .nav-brand a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-menu span {
+            color: white;
+            margin-left: 1rem;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            background: white;
+            min-width: 150px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #333 !important;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            display: block;
+            background: none !important;
+            border-radius: 0 !important;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background: #f1f1f1 !important;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+                padding: 2rem 0;
+                gap: 1rem;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .nav-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .nav-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+
+            .nav-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .filter-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-select {
+                min-width: auto;
+            }
+        }
+    </style>
+    <script src="../promo.js"></script>
+    <script src="orders.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شكراً لك - متجر إلكتروني</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .thank-you-container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+            margin: 2rem;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #00c851 0%, #007e33 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem auto;
+            animation: bounceIn 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-icon::before {
+            content: '✓';
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .thank-you-title {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            animation: fadeIn 0.8s ease-out 0.5s both;
+        }
+
+        .thank-you-subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.8s ease-out 0.7s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: right;
+            animation: fadeIn 0.8s ease-out 0.9s both;
+        }
+
+        .order-info {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #667eea;
+        }
+
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .order-items {
+            margin-top: 1.5rem;
+        }
+
+        .order-items h4 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .item-list {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .item-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .item-details {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .item-total {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            animation: fadeIn 0.8s ease-out 1.1s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            min-width: 150px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #666;
+            border: 2px solid #ddd;
+        }
+
+        .btn-outline:hover {
+            background: #f8f9fa;
+            border-color: #667eea;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .additional-info {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            animation: fadeIn 0.8s ease-out 1.3s both;
+        }
+
+        .additional-info h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem auto;
+            font-size: 1.5rem;
+        }
+
+        .info-card h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+            font-size: 2rem;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        .floating-element:nth-child(4) {
+            bottom: 20%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            animation: confetti-fall 3s linear forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .thank-you-container {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+
+            .thank-you-title {
+                font-size: 2rem;
+            }
+
+            .thank-you-subtitle {
+                font-size: 1rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .order-summary {
+                padding: 1.5rem;
+            }
+
+            .order-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .thank-you-container {
+                box-shadow: none;
+                border: 1px solid #ddd;
+                max-width: none;
+                width: 100%;
+            }
+
+            .action-buttons,
+            .floating-elements,
+            .confetti {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <div class="floating-element">🎉</div>
+        <div class="floating-element">✨</div>
+        <div class="floating-element">🎊</div>
+        <div class="floating-element">⭐</div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti" id="confetti"></div>
+
+    <!-- Main Content -->
+    <div class="thank-you-container">
+        <!-- Success Icon -->
+        <div class="success-icon"></div>
+
+        <!-- Thank You Message -->
+        <h1 class="thank-you-title">شكراً لك!</h1>
+        <p class="thank-you-subtitle">تم إنشاء طلبك بنجاح وسيتم معالجته في أقرب وقت</p>
+
+        <!-- Order Summary -->
+        <div class="order-summary" id="order-summary">
+            <div class="order-info">
+                <div class="info-row">
+                    <span class="info-label">رقم الطلب:</span>
+                    <span class="info-value" id="order-id">ORD-2024-001</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">تاريخ الطلب:</span>
+                    <span class="info-value" id="order-date">25 مايو 2025</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">حالة الطلب:</span>
+                    <span class="info-value" id="order-status">قيد المراجعة</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">طريقة الدفع:</span>
+                    <span class="info-value" id="payment-method">الدفع عند الاستلام</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">المجموع الكلي:</span>
+                    <span class="info-value" id="order-total">850 ج.م</span>
+                </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="order-items">
+                <h4>المنتجات المطلوبة:</h4>
+                <div class="item-list" id="order-items-list">
+                    <div class="order-item">
+                        <div>
+                            <div class="item-name">جهاز كمبيوتر محمول</div>
+                            <div class="item-details">الكمية: 1 × 750 ج.م</div>
+                        </div>
+                        <div class="item-total">750 ج.م</div>
+                    </div>
+                    <div class="order-item">
+                        <div>
+                            <div class="item-name">ماوس لاسلكي</div>
+                            <div class="item-details">الكمية: 2 × 50 ج.م</div>
+                        </div>
+                        <div class="item-total">100 ج.م</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="#" class="btn btn-primary">
+                📋 عرض طلباتي
+            </a>
+            <a href="#" class="btn btn-secondary">
+                🛍️ متابعة التسوق
+            </a>
+            <button onclick="printOrder()" class="btn btn-outline">
+                🖨️ طباعة الطلب
+            </button>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="additional-info">
+            <h3>ماذا بعد ذلك؟</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-card-icon">📧</div>
+                    <h4>تأكيد الطلب</h4>
+                    <p>ستصلك رسالة تأكيد عبر البريد الإلكتروني خلال دقائق قليلة</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">🚚</div>
+                    <h4>معالجة الطلب</h4>
+                    <p>سيتم تحضير طلبك وشحنه خلال 2-3 أيام عمل</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">🎯</div>
+                    <h4>التتبع</h4>
+                    <p>يمكنك متابعة حالة طلبك في أي وقت من خلال حسابك</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div style="background: #f8f9fa; border-radius: 10px; padding: 1.5rem; margin-top: 2rem; text-align: center;">
+            <h4 style="color: #333; margin-bottom: 1rem;">هل تحتاج إلى مساعدة؟</h4>
+            <p style="color: #666; margin-bottom: 1rem;">فريق خدمة العملاء متاح لمساعدتك</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                <span style="color: #667eea; font-weight: 600;">📞 01234567890</span>
+                <span style="color: #667eea; font-weight: 600;">✉️ support@store.com</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate confetti animation
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confetti');
+            const colors = ['#667eea', '#764ba2', '#00c851', '#ff6b6b', '#ffd93d', '#6c5ce7'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confettiPiece = document.createElement('div');
+                    confettiPiece.className = 'confetti-piece';
+                    confettiPiece.style.left = Math.random() * 100 + '%';
+                    confettiPiece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confettiPiece.style.animationDelay = Math.random() * 3 + 's';
+                    confettiContainer.appendChild(confettiPiece);
+                    
+                    setTimeout(() => {
+                        confettiPiece.remove();
+                    }, 3000);
+                }, i * 100);
+            }
+        }
+
+        // Print order function
+        function printOrder() {
+            window.print();
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create confetti effect
+            setTimeout(createConfetti, 1000);
+            
+            // Set current date
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                locale: 'ar-EG'
+            };
+            document.getElementById('order-date').textContent = now.toLocaleDateString('ar-EG', options);
+            
+            // Generate random order ID
+            const orderId = 'ORD-' + new Date().getFullYear() + '-' + Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            document.getElementById('order-id').textContent = orderId;
+        });
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

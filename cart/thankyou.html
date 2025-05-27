@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تم تأكيد طلبك - متجر إلكتروني</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo"><h1><i class="fas fa-store"></i> متجري</h1></div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="../index.html">الرئيسية</a></li>
+                        <li><a href="../products/products.html">المنتجات</a></li>
+                        <li><a href="../cart/cart.html">السلة</a></li>
+                        <li><a href="orders.html">طلباتي</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="thank-you-container" style="text-align: center; padding: 3rem;">
+                <div class="thank-you-card" style="background: white; padding: 2rem; border-radius: 10px;">
+                    <div class="success-icon" style="background: green; color: white; font-size: 2rem; border-radius: 50%; width: 80px; height: 80px; margin: auto;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h2>تم تأكيد طلبك بنجاح!</h2>
+                    <p>شكراً لك على الشراء من متجري. سيتم معالجة الطلب قريباً.</p>
+                    <div id="order-details" style="margin-top: 2rem; text-align: right;"></div>
+                    <div style="margin-top: 2rem;">
+                        <a href="../products/products.html" class="btn btn-outline">العودة للتسوق</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p style="text-align: center;">&copy; 2024 متجري. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="../storage.js"></script>
+    <script src="../payment.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get("orderId");
+            const orderDetailsEl = document.getElementById("order-details");
+
+            if (!orderId) {
+                orderDetailsEl.innerHTML = "<p style='color:red;'>رقم الطلب غير موجود</p>";
+                return;
+            }
+
+            const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+            const order = orders.find(o => o.id === orderId);
+
+            if (!order) {
+                orderDetailsEl.innerHTML = "<p style='color:red;'>لم يتم العثور على تفاصيل الطلب</p>";
+                return;
+            }
+
+            let html = "<h3>تفاصيل الطلب:</h3>";
+            html += `<p><strong>رقم الطلب:</strong> #${order.id}</p>`;
+            html += `<p><strong>عدد المنتجات:</strong> ${order.items.length}</p>`;
+            html += `<p><strong>الإجمالي:</strong> ${order.total.toFixed(2)} جنيه</p>`;
+            orderDetailsEl.innerHTML = html;
+        });
+    </script>
+</body>
+</html>
